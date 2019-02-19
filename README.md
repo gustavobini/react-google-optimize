@@ -39,12 +39,12 @@ export default class App extends React.Component {
 
 Props:
 
-> **name:** the experiment name configured in Google Optimize.
-> **loadingComponent:** a component to be rendered while the variants are being requested from Google Optimize.
+- **name:** the experiment name configured in Google Optimize.
+- **loadingComponent:** a component to be rendered while the variants are being requested from Google Optimize.
 
 ## Variant component
 
 Props:
 
-> **default:** sets this variant as the default. This value is used in case Google Optimize is not loaded or something fails.
-> **id:** the variant id configured in Google Optimize.
+- **default:** sets this variant as the default. This value is used in case Google Optimize is not loaded or something fails.
+- **id:** the variant id configured in Google Optimize.
