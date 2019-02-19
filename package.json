@@ -1,0 +1,65 @@
+{
+  "name": "react-google-optimize",
+  "version": "0.1.0",
+  "description": "React helpers for Google Optimize A/B testing.",
+  "main": "build/react-google-optimize.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gustavobini/react-google-optimize.git"
+  },
+  "author": {
+    "name": "Gustavo Bini",
+    "email": "gustavobini@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gustavobini/react-google-optimize/issues"
+  },
+  "homepage": "https://github.com/gustavobini/react-google-optimize#readme",
+  "engines": {
+    "node": ">=8.9.4"
+  },
+  "scripts": {
+    "start": "webpack --watch --mode production",
+    "build": "webpack --mode production",
+    "test": "jest",
+    "test:watch": "jest --watch --verbose",
+    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js",
+    "lint": "./node_modules/.bin/eslint src/**/*.{js,jsx}"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/src/setupTests.js"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@types/jest": "^24.0.6",
+    "@types/react": "^16.8.3",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "eslint": "^5.14.1",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-config-react-app": "^3.0.7",
+    "eslint-plugin-flowtype": "^2.50.3",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.12.4",
+    "jest": "^23.6.0",
+    "jest-dom": "^2.1.1",
+    "prettier": "1.15.3",
+    "react-testing-library": "^5.2.0",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2"
+  }
+}
