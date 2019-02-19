@@ -1,6 +1,6 @@
 {
   "name": "react-google-optimize",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "React helpers for Google Optimize A/B testing.",
   "main": "build/react-google-optimize.js",
   "repository": {

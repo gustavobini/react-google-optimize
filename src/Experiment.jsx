@@ -24,6 +24,10 @@ export default class Experiment extends React.Component {
         throw new Error('window.dataLayer must not be undefined.');
       }
 
+      if (!window.google_optimize) {
+        throw new Error('window.google_optimize must not be undefined.');
+      }
+
       this.gtag = function gtag() {
         window.dataLayer.push(arguments);
       };
