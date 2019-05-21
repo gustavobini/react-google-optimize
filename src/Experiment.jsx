@@ -22,6 +22,11 @@ export default class Experiment extends React.Component {
         throw new Error('You must specify the experiment name.');
       }
 
+      gtag('event', 'optimize.callback', {
+        callback: (value, name) =>
+          console.log(`Experiment with ID '${name}' is on variant '${value}'`)
+      });
+
       this.registerImplementationCallback();
     } catch (error) {
       console.error(error.message);
@@ -32,6 +37,11 @@ export default class Experiment extends React.Component {
   componentWillUnmount() {
     gtag('event', 'optimize.callback', {
       name: this.props.name,
+      callback: this.setVariant,
+      remove: true
+    });
+
+    gtag('event', 'optimize.callback', {
       callback: this.setVariant,
       remove: true
     });
