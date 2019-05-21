@@ -10,29 +10,21 @@ npm i react-google-optimize
 
 ## Usage
 
-**You must have Google Optimize added to your application.**
+⚠️ **You must have Google Optimize added to your application.**
 
-```
+```javascript
 import React from 'react';
 import { Experiment, Variant } from 'react-google-optimize';
 
-export default class App extends React.Component {
-  render() {
-    return(
-      <Experiment name="about-page">
-        <Variant default id="0">
-          Default variant
-        </Variant>
-        <Variant id="1">
-          Variant 1
-        </Variant>
-        <Variant id="2">
-          Variant 2
-        </Variant>
-      </Experiment>
-    )
-  }
-}
+export default () => (
+  <Experiment name="about-page">
+    <Variant default id="0">
+      Default variant
+    </Variant>
+    <Variant id="1">Variant 1</Variant>
+    <Variant id="2">Variant 2</Variant>
+  </Experiment>
+);
 ```
 
 ## Experiment component
@@ -40,7 +32,7 @@ export default class App extends React.Component {
 Props:
 
 - **name:** the experiment name configured in Google Optimize.
-- **loadingComponent:** a component to be rendered while the variants are being requested from Google Optimize.
+- **loadingComponent:** (optional) a component to be rendered while the variants are being requested from Google Optimize.
 
 ## Variant component
 
