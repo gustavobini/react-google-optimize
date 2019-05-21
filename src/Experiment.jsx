@@ -1,6 +1,10 @@
 import React from 'react';
-
 import { GoogleOptimizeContext } from './GoogleOptimizeContext';
+
+const gtag = function gtag() {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(arguments);
+};
 
 export default class Experiment extends React.Component {
   static defaultProps = {
@@ -9,28 +13,14 @@ export default class Experiment extends React.Component {
   };
 
   state = {
-    variant: null
+    variant: typeof window === 'undefined' ? 'default' : null
   };
-
-  gtag = null;
 
   componentDidMount() {
     try {
       if (!this.props.name) {
         throw new Error('You must specify the experiment name.');
       }
-
-      if (!window.dataLayer) {
-        throw new Error('window.dataLayer must not be undefined.');
-      }
-
-      if (!window.google_optimize) {
-        throw new Error('window.google_optimize must not be undefined.');
-      }
-
-      this.gtag = function gtag() {
-        window.dataLayer.push(arguments);
-      };
 
       this.registerImplementationCallback();
     } catch (error) {
@@ -40,20 +30,18 @@ export default class Experiment extends React.Component {
   }
 
   componentWillUnmount() {
-    this.gtag &&
-      this.gtag('event', 'optimize.callback', {
-        name: this.props.name,
-        callback: this.setVariant,
-        remove: true
-      });
+    gtag('event', 'optimize.callback', {
+      name: this.props.name,
+      callback: this.setVariant,
+      remove: true
+    });
   }
 
   registerImplementationCallback = () => {
-    this.gtag &&
-      this.gtag('event', 'optimize.callback', {
-        name: this.props.name,
-        callback: this.setVariant
-      });
+    gtag('event', 'optimize.callback', {
+      name: this.props.name,
+      callback: this.setVariant
+    });
   };
 
   setVariant = value => {
@@ -63,11 +51,15 @@ export default class Experiment extends React.Component {
   };
 
   render() {
+    let { variant } = this.state;
+
+    if (variant === null && !this.props.loadingComponent) {
+      variant = 'default';
+    }
+
     return (
-      <GoogleOptimizeContext.Provider value={this.state.variant}>
-        {this.state.variant === null
-          ? this.props.loadingComponent
-          : this.props.children}
+      <GoogleOptimizeContext.Provider value={variant}>
+        {variant === null ? this.props.loadingComponent : this.props.children}
       </GoogleOptimizeContext.Provider>
     );
   }
