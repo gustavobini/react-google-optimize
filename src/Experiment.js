@@ -50,11 +50,42 @@ export default class Experiment extends React.Component {
     });
   };
 
+  matchVariants(value) {
+    if (value === 'default') {
+      return React.Children.map(
+        this.props.children,
+        child => child.props.default
+      ).filter(x => x).length;
+    }
+
+    return React.Children.map(
+      this.props.children,
+      child => child.props.id
+    ).filter(id => id === value).length;
+  }
+
   render() {
     let { variant } = this.state;
-
     if (variant === null && !this.props.loadingComponent) {
       variant = 'default';
+    }
+
+    const matchingVariants = this.matchVariants(variant);
+
+    if (matchingVariants === 0) {
+      throw new Error(
+        `Variant '${variant}' has not been registered for experiment '${
+          this.props.name
+        }'`
+      );
+    }
+
+    if (matchingVariants > 1) {
+      throw new Error(
+        `Experiment '${
+          this.props.name
+        }' cannot support more than 1 variant registed with id '${variant}' (${matchingVariants} found)`
+      );
     }
 
     return (
