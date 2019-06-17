@@ -23,11 +23,9 @@ export default class Experiment extends React.Component {
       }
 
       gtag('event', 'optimize.callback', {
-        callback: (value, name) =>
-          console.log(`Experiment with ID '${name}' is on variant '${value}'`)
+        name: this.props.name,
+        callback: this.setVariant
       });
-
-      this.registerImplementationCallback();
     } catch (error) {
       console.error(error.message);
       this.setState({ variant: 'default' });
@@ -40,21 +38,13 @@ export default class Experiment extends React.Component {
       callback: this.setVariant,
       remove: true
     });
-
-    gtag('event', 'optimize.callback', {
-      callback: this.setVariant,
-      remove: true
-    });
   }
 
-  registerImplementationCallback = () => {
-    gtag('event', 'optimize.callback', {
-      name: this.props.name,
-      callback: this.setVariant
-    });
-  };
-
   setVariant = value => {
+    console.log(
+      `Experiment with ID '${this.props.name}' is on variant '${value}'`
+    );
+
     this.setState({
       variant: value === undefined || value === null ? 'default' : value
     });

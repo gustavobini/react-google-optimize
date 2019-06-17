@@ -6,14 +6,10 @@ export default class Variant extends React.Component {
   static contextType = GoogleOptimizeContext;
 
   componentDidMount() {
-    try {
-      if (!this.props.default && !this.props.id) {
-        throw new Error(
-          'You must specify this variant as default or set a variant id.'
-        );
-      }
-    } catch (error) {
-      console.error(error);
+    if (!this.props.default && !this.props.id) {
+      throw new Error(
+        'You must specify this variant as default or set a variant id.'
+      );
     }
   }
 
