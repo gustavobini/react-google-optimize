@@ -1,5 +1,3 @@
 import React from 'react';
 
-const GoogleOptimizeContext = React.createContext(null);
-
-export { GoogleOptimizeContext };
+export const GoogleOptimizeContext = React.createContext(null);
